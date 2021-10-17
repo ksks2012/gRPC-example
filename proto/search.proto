@@ -23,3 +23,7 @@ service MachineGreeter {
 service ReverseMachineGreeter {
 	rpc SayRecord(stream HelloRequest) returns (HelloReply) {};
 }
+
+service BidirectionalGreeter {
+	rpc SayRoute(stream HelloRequest) returns (stream HelloReply) {};
+}

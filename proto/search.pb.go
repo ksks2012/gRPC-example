@@ -143,8 +143,14 @@ var file_proto_search_proto_rawDesc = []byte{
 	0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x12, 0x18, 0x2e, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x77, 0x6f,
 	0x72, 0x6c, 0x64, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
 	0x1a, 0x16, 0x2e, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x2e, 0x48, 0x65,
-	0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x28, 0x01, 0x42, 0x08, 0x5a, 0x06,
-	0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x28, 0x01, 0x32, 0x5a, 0x0a, 0x14,
+	0x42, 0x69, 0x64, 0x69, 0x72, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x47, 0x72, 0x65,
+	0x65, 0x74, 0x65, 0x72, 0x12, 0x42, 0x0a, 0x08, 0x53, 0x61, 0x79, 0x52, 0x6f, 0x75, 0x74, 0x65,
+	0x12, 0x18, 0x2e, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x2e, 0x48, 0x65,
+	0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x68, 0x65, 0x6c,
+	0x6c, 0x6f, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x70,
+	0x6c, 0x79, 0x22, 0x00, 0x28, 0x01, 0x30, 0x01, 0x42, 0x08, 0x5a, 0x06, 0x2f, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -168,11 +174,13 @@ var file_proto_search_proto_depIdxs = []int32{
 	0, // 0: helloworld.Greeter.SayHello:input_type -> helloworld.HelloRequest
 	0, // 1: helloworld.MachineGreeter.SayList:input_type -> helloworld.HelloRequest
 	0, // 2: helloworld.ReverseMachineGreeter.SayRecord:input_type -> helloworld.HelloRequest
-	1, // 3: helloworld.Greeter.SayHello:output_type -> helloworld.HelloReply
-	1, // 4: helloworld.MachineGreeter.SayList:output_type -> helloworld.HelloReply
-	1, // 5: helloworld.ReverseMachineGreeter.SayRecord:output_type -> helloworld.HelloReply
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
+	0, // 3: helloworld.BidirectionalGreeter.SayRoute:input_type -> helloworld.HelloRequest
+	1, // 4: helloworld.Greeter.SayHello:output_type -> helloworld.HelloReply
+	1, // 5: helloworld.MachineGreeter.SayList:output_type -> helloworld.HelloReply
+	1, // 6: helloworld.ReverseMachineGreeter.SayRecord:output_type -> helloworld.HelloReply
+	1, // 7: helloworld.BidirectionalGreeter.SayRoute:output_type -> helloworld.HelloReply
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -217,7 +225,7 @@ func file_proto_search_proto_init() {
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
-			NumServices:   3,
+			NumServices:   4,
 		},
 		GoTypes:           file_proto_search_proto_goTypes,
 		DependencyIndexes: file_proto_search_proto_depIdxs,
@@ -508,6 +516,110 @@ var _ReverseMachineGreeter_serviceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "SayRecord",
 			Handler:       _ReverseMachineGreeter_SayRecord_Handler,
+			ClientStreams: true,
+		},
+	},
+	Metadata: "proto/search.proto",
+}
+
+// BidirectionalGreeterClient is the client API for BidirectionalGreeter service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type BidirectionalGreeterClient interface {
+	SayRoute(ctx context.Context, opts ...grpc.CallOption) (BidirectionalGreeter_SayRouteClient, error)
+}
+
+type bidirectionalGreeterClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewBidirectionalGreeterClient(cc grpc.ClientConnInterface) BidirectionalGreeterClient {
+	return &bidirectionalGreeterClient{cc}
+}
+
+func (c *bidirectionalGreeterClient) SayRoute(ctx context.Context, opts ...grpc.CallOption) (BidirectionalGreeter_SayRouteClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_BidirectionalGreeter_serviceDesc.Streams[0], "/helloworld.BidirectionalGreeter/SayRoute", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &bidirectionalGreeterSayRouteClient{stream}
+	return x, nil
+}
+
+type BidirectionalGreeter_SayRouteClient interface {
+	Send(*HelloRequest) error
+	Recv() (*HelloReply, error)
+	grpc.ClientStream
+}
+
+type bidirectionalGreeterSayRouteClient struct {
+	grpc.ClientStream
+}
+
+func (x *bidirectionalGreeterSayRouteClient) Send(m *HelloRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *bidirectionalGreeterSayRouteClient) Recv() (*HelloReply, error) {
+	m := new(HelloReply)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+// BidirectionalGreeterServer is the server API for BidirectionalGreeter service.
+type BidirectionalGreeterServer interface {
+	SayRoute(BidirectionalGreeter_SayRouteServer) error
+}
+
+// UnimplementedBidirectionalGreeterServer can be embedded to have forward compatible implementations.
+type UnimplementedBidirectionalGreeterServer struct {
+}
+
+func (*UnimplementedBidirectionalGreeterServer) SayRoute(BidirectionalGreeter_SayRouteServer) error {
+	return status.Errorf(codes.Unimplemented, "method SayRoute not implemented")
+}
+
+func RegisterBidirectionalGreeterServer(s *grpc.Server, srv BidirectionalGreeterServer) {
+	s.RegisterService(&_BidirectionalGreeter_serviceDesc, srv)
+}
+
+func _BidirectionalGreeter_SayRoute_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(BidirectionalGreeterServer).SayRoute(&bidirectionalGreeterSayRouteServer{stream})
+}
+
+type BidirectionalGreeter_SayRouteServer interface {
+	Send(*HelloReply) error
+	Recv() (*HelloRequest, error)
+	grpc.ServerStream
+}
+
+type bidirectionalGreeterSayRouteServer struct {
+	grpc.ServerStream
+}
+
+func (x *bidirectionalGreeterSayRouteServer) Send(m *HelloReply) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *bidirectionalGreeterSayRouteServer) Recv() (*HelloRequest, error) {
+	m := new(HelloRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+var _BidirectionalGreeter_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "helloworld.BidirectionalGreeter",
+	HandlerType: (*BidirectionalGreeterServer)(nil),
+	Methods:     []grpc.MethodDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "SayRoute",
+			Handler:       _BidirectionalGreeter_SayRoute_Handler,
+			ServerStreams: true,
 			ClientStreams: true,
 		},
 	},
